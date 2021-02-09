@@ -1,6 +1,8 @@
+// variaveis 
 let canvas = document.getElementById("snake"); //criar elemento que irá rodar o jogo
 let context = canvas.getContext("2d"); // renderiza o desenho de canvas
 let box = 32;
+let direction = "right";  // variavel definida para orientar os movimentos da cobra
 let snake = []; //criar cobrinha como lista, já que ela vai ser uma série de coordenadas, que quando pintadas, criam os quadradinhos
 snake[0] ={
     x: 8 * box,
@@ -20,7 +22,32 @@ function criarCobrinha (){ // funcao que desenha a cobra em uma iteracao
     }
 }
 
+function iniciarJogo(){
 
-// chamada de funcoes
+    // chamada de funcoes
     criarBG();
     criarCobrinha();
+
+    let snakeX = snake[0].x;
+    let snakeY = snake[0].y;
+
+    // movimentos da cobra
+        if(direction == "right") snakeX += box;     // acrescenta coordenada para direita
+        if(direction == "left") snakeX -= box;      // decresce coordenada para esquerda
+        if(direction == "up") snakeY -= box;        //  decresce coordenada para cima
+        if(direction == "down") snakeY += box;      // acrescenta coordenada para baixo
+
+        snake.pop();  
+        
+        let newHead = {  
+            x: snakeX,
+            y: snakeY
+        }
+
+        snake.unshift(newHead); 
+
+}
+
+let jogo = setInterval(iniciarJogo, 100); // passando intervalo de 100ms para renovar
+
+
