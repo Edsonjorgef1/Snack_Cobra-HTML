@@ -5,6 +5,12 @@ let box = 32;
 let direction = "right";  // variavel definida para orientar os movimentos da cobra
 let snake = []; //criar cobrinha como lista, já que ela vai ser uma série de coordenadas, que quando pintadas, criam os quadradinhos
 let game = setInterval(startGame, 120); // passando intervalo de 100ms para renovar
+document.addEventListener('keydown', update); // eventos de clique do botao
+
+let food = {
+    x: Math.floor(Math.random() * 15 + 1) * box,
+    y: Math.floor(Math.random() * 15 + 1) * box
+}
 
 // array de definicao de coordenadada da cobra
 snake[0] ={
@@ -12,20 +18,25 @@ snake[0] ={
     y: 8 * box
 }
 
-function createBG(){ // funcao que cria o Background
+// funcao que cria o Background
+function createBG(){ 
     context.fillStyle = "yellow"; 
     context.fillRect(0, 0, 16*box, 16*box); //desenha o nosso rectângulo usando x e y ; altura e largura iniciadas
 }
 
-function createSnake (){ // funcao que desenha a cobra em uma iteracao
+// funcao que desenha a cobra em uma iteracao
+function createSnake (){ 
     for(i = 0; i < snake.length; i++){
         context.fillStyle = "green";
         context.fillRect(snake[i].x, snake[i].y, box, box);
     }
 }
 
-// eventos de clique do botao
-document.addEventListener('keydown', update);
+// funcao que desenhar a comida da cobra
+function drawFood(){
+    context.fillStyle = "red";
+    context.fillRect(food.x, food.y, box, box);
+}
 
 // funcao que movimenta a cobra 
 function update(event){
@@ -35,6 +46,7 @@ function update(event){
     if(event.keyCode == 40 && direction != "up") direction = "down";
 }
 
+// funcao que permite a cobra iniciar em outro extremo 
 function borderless(){
     if(snake[0].x > 15 * box && direction == "right") snake[0].x = 0;
     if(snake[0].x < 0 * box && direction == "left") snake[0].x = 16 * box;
@@ -42,6 +54,7 @@ function borderless(){
     if(snake[0].y < 0 * box && direction == "up") snake[0].y = 16 * box;
 }
 
+// funcao que permite a cobra movimentar 
 function snakeMoves(){
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
@@ -69,6 +82,7 @@ function startGame(){
     createBG();
     createSnake();
     snakeMoves();
+    drawFood();
 
 }
 
