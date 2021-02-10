@@ -4,7 +4,7 @@ let context = canvas.getContext("2d"); // renderiza o desenho de canvas
 let box = 32;
 let direction = "right";  // variavel definida para orientar os movimentos da cobra
 let snake = []; //criar cobrinha como lista, já que ela vai ser uma série de coordenadas, que quando pintadas, criam os quadradinhos
-let game = setInterval(startGame, 120); // passando intervalo de 100ms para renovar
+let game = setInterval(startGame, 100); // passando intervalo de 100ms para renovar
 document.addEventListener('keydown', update); // eventos de clique do botao
 
 let food = {
@@ -68,6 +68,9 @@ function snakeMoves(){
         // cobra come a fruta e aumenta tamanho
         if(snakeX != food.x || snakeY != food.y){
             snake.pop();
+        }else{  // quando a cobra comer a fruta, cria uma nova posicao de fruta
+            food.x = Math.floor(Math.random() * 15 + 1) * box;
+            food.y = Math.floor(Math.random() * 15 + 1) * box;
         }
 
         let newHead = {  
