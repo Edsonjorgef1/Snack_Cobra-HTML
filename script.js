@@ -20,7 +20,7 @@ snake[0] ={
 
 // funcao que cria o Background
 function createBG(){ 
-    context.fillStyle = "yellow"; 
+    context.fillStyle = "yellow";
     context.fillRect(0, 0, 16*box, 16*box); //desenha o nosso rectângulo usando x e y ; altura e largura iniciadas
 }
 
@@ -65,8 +65,11 @@ function snakeMoves(){
         if(direction == "up") snakeY -= box;        //  decresce coordenada para cima
         if(direction == "down") snakeY += box;      // acrescenta coordenada para baixo
 
-        snake.pop();  
-        
+        // cobra come a fruta e aumenta tamanho
+        if(snakeX != food.x || snakeY != food.y){
+            snake.pop();
+        }
+
         let newHead = {  
             x: snakeX,
             y: snakeY
