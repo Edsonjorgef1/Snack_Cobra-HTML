@@ -67,7 +67,7 @@ function snakeMoves(){
 
         // cobra come a fruta e aumenta tamanho
         if(snakeX != food.x || snakeY != food.y){
-            snake.pop();
+            snake.pop(); //pop tira o último elemento da lista
         }else{  // quando a cobra comer a fruta, cria uma nova posicao de fruta
             food.x = Math.floor(Math.random() * 15 + 1) * box;
             food.y = Math.floor(Math.random() * 15 + 1) * box;
@@ -78,15 +78,15 @@ function snakeMoves(){
             y: snakeY
         }
 
-        snake.unshift(newHead); 
+        snake.unshift(newHead);  // adiciona como primeiro quadradinho da cobrinha
 }
 
 function startGame(){
 
-    //
+    // finalizando o jogo
     for(i=1; i < snake.length; i++){
         if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
-            clearInterval(game);  // finalizando o jogo quando cumprir condicao
+            clearInterval(game);  // para o jogo que foi setado
             alert('Game over :(');
         }
     }
